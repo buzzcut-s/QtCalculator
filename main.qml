@@ -15,6 +15,7 @@ Window {
         anchors.margins: 10
 
         TextField {
+            text: Calculator.outputBuffer
             Layout.fillWidth: true
             font.pixelSize: 30
             horizontalAlignment: TextInput.AlignRight
@@ -48,7 +49,7 @@ Window {
                         verticalAlignment: Text.AlignVCenter
                     }
 
-                    onClicked: print(modelData)
+                    onClicked: Calculator.process(modelData)
                 }
             }
         }
