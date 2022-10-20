@@ -19,6 +19,7 @@ set(PROJECT_SOURCES
         qml.qrc
         Lexer.h Lexer.cpp
         Parser.h Parser.cpp
+        Calculator.h Calculator.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
