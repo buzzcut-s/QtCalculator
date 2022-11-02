@@ -19,6 +19,16 @@ void Calculator::setOutputBuffer(const QString& input)
     emit outputBufferChanged();
 }
 
+static bool isOperator(const QString& input)
+{
+    return input == "/" || input == "*" || input == "+" || input == "-";
+}
+
+static bool isOperator(QCharRef input)
+{
+    return input == "/" || input == "*" || input == "+" || input == "-";
+}
+
 void Calculator::process(const QString& input)
 {
     static auto lexer  = Lexer();
@@ -34,6 +44,28 @@ void Calculator::process(const QString& input)
         outputBuffer.chop(1);
         m_overwriteBuffer = false;
     }
+    else if (isOperator(input))
+    {
+        m_overwriteBuffer = false;
+        if (outputBuffer.isEmpty() && input == "-")
+        {
+            outputBuffer += input;
+        }
+        else if (outputBuffer.isEmpty() || outputBuffer.back() == input)
+        {
+            return;
+        }
+        else
+        {
+            if (isOperator(outputBuffer.back()))
+            {
+                if (outputBuffer.back() == "-" && outputBuffer.size() == 1)
+                    return;
+                outputBuffer.chop(1);
+            }
+            outputBuffer += input;
+        }
+    }
     else if (input == "=")
     {
         if (!outputBuffer.isEmpty())
@@ -45,10 +77,19 @@ void Calculator::process(const QString& input)
     }
     else
     {
+        if (input == "." && !outputBuffer.isEmpty()
+            && (outputBuffer.back() == "." || isOperator(outputBuffer.back())))
+        {
+            return;
+        }
         if (m_overwriteBuffer)
+        {
             outputBuffer = input;
+        }
         else
+        {
             outputBuffer += input;
+        }
         m_overwriteBuffer = false;
     }
 
