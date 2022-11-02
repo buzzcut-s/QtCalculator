@@ -37,7 +37,7 @@ void Calculator::process(const QString& input)
     if (input == "C")
     {
         outputBuffer.clear();
-        m_overwriteBuffer = false;
+        m_overwriteBuffer = true;
     }
     else if (input == "<-")
     {
