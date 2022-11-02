@@ -39,7 +39,7 @@ void Calculator::process(const QString& input)
         outputBuffer.clear();
         m_overwriteBuffer = true;
     }
-    else if (input == "<-")
+    else if (input == "←")
     {
         outputBuffer.chop(1);
         m_overwriteBuffer = false;
