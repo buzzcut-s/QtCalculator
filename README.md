@@ -6,7 +6,9 @@ QtCalculator is a calculator with the UI written in QML, which is hooked up to a
 
 # Release Build
 
-QtCalculator is built using CMake and requires at least C++17 and Qt 5.13. QtCreator may additionally be used to open the project.
+QtCalculator is built using CMake and requires at least C++17 and Qt 5.13. clang-tidy and clang-format config files are also provided.
+
+QtCreator may additionally be used to open the project.
 
 ```
 git clone https://github.com/buzzcut-s/QtCalculator.git
