@@ -21,6 +21,7 @@ signals:
 
 private:
     QString outputBuffer;
+    bool    m_overwriteBuffer{};
 };
 
 #endif  // CALCULATOR_H

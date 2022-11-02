@@ -27,10 +27,12 @@ void Calculator::process(const QString& input)
     if (input == "C")
     {
         outputBuffer.clear();
+        m_overwriteBuffer = false;
     }
     else if (input == "<-")
     {
         outputBuffer.chop(1);
+        m_overwriteBuffer = false;
     }
     else if (input == "=")
     {
@@ -39,10 +41,15 @@ void Calculator::process(const QString& input)
             lexer.setExpression(outputBuffer);
             outputBuffer = QString::number(parser.calculate());
         }
+        m_overwriteBuffer = true;
     }
     else
     {
-        outputBuffer += input;
+        if (m_overwriteBuffer)
+            outputBuffer = input;
+        else
+            outputBuffer += input;
+        m_overwriteBuffer = false;
     }
 
     emit outputBufferChanged();
