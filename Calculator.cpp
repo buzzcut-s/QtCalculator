@@ -72,8 +72,27 @@ void Calculator::process(const QString& input)
         {
             lexer.setExpression(outputBuffer);
             outputBuffer = QString::number(parser.calculate());
+
+            m_history.push_back(outputBuffer);
+            m_historyIdx = m_history.size() - 1;
         }
         m_overwriteBuffer = true;
+    }
+    else if (input == "↓")
+    {
+        if (m_historyIdx + 1 < m_history.size())
+        {
+            outputBuffer      = m_history[++m_historyIdx];
+            m_overwriteBuffer = true;
+        }
+    }
+    else if (input == "↑")
+    {
+        if (m_historyIdx - 1 >= 0)
+        {
+            outputBuffer      = m_history[--m_historyIdx];
+            m_overwriteBuffer = true;
+        }
     }
     else
     {

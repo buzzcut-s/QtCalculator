@@ -1,6 +1,8 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
 
+#include <vector>
+
 #include <QObject>
 
 class Calculator : public QObject
@@ -22,6 +24,9 @@ signals:
 private:
     QString outputBuffer;
     bool    m_overwriteBuffer{};
+
+    std::vector<QString> m_history;
+    int                  m_historyIdx{};
 };
 
 #endif  // CALCULATOR_H
